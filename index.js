@@ -9,16 +9,20 @@ async function getCurrentTemperature(city) {
         }
         const result = await response.json();
 
-        fs.writeFile("./output", `It is currently ${result.current.temp_f} degrees in New York`, err => {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log("File written successfully");
-            }
-        })
+        return result.current.temp_f;
     } catch (error) {
         console.error(error.message);
     }
 }
 
-getCurrentTemperature("New York");
+const city = "New York";
+getCurrentTemperature(city).then(data => {
+    fs.writeFile("./output", `It is currently ${data} degrees in ${city}`, err => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log("File written successfully");
+        }
+    });
+});
+
