@@ -1,3 +1,5 @@
+const fs = require("node:fs");
+
 async function getData(url) {
     try {
         const response = await fetch(url);
@@ -6,6 +8,14 @@ async function getData(url) {
         }
         const result = await response.json();
         console.log(result);
+
+        fs.writeFile("./output", `It is currently ${result.current.temp_f} degrees in New York`, error => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log("File written successfully");
+            }
+        })
     } catch (error) {
         console.error(error.message);
     }
