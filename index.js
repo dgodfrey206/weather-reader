@@ -9,7 +9,7 @@ async function getData(url) {
         const result = await response.json();
         console.log(result);
 
-        fs.writeFile("./output", `It is currently ${result.current.temp_f} degrees in New York`, error => {
+        fs.writeFile("./output", `It is currently ${result.current.temp_f} degrees in New York`, err => {
             if (err) {
                 console.error(err);
             } else {
